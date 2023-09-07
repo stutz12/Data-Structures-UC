@@ -9,6 +9,7 @@
 #include <fstream>
 #include <string>
 
+
 using namespace std;
 
 int main() {
@@ -31,6 +32,7 @@ int main() {
         } while(iFile.fail());
         
         //If the file is open correctly,cout the contents
+        //Delete this code and replace with parsing logic. I believe this is stephen's task
         if(iFile) {
             while(getline(iFile, line)) {
                 cout << line << endl;;
@@ -48,7 +50,7 @@ int main() {
         }
     }
     
-    cout << "Successfully processed the file. Now closing  " << name << "and terminating program"<< endl;
+    cout << "Successfully processed the file. Now closing  " << name << "and terminating program."<< endl;
     iFile.close();
     
     return 0;
