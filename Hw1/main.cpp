@@ -18,11 +18,10 @@ int main() {
     fstream oFile; //for writing output to a file
     string name; //contains name of file
     string line; //hold line for parsing
-    bool choice = true;
     string decision;
     
     //outer while loop will be responsible for prompting user if they want to parse another file.
-    while(choice) {
+    while(true) {
         //while the file isn't opened up correctly, continue prompting the user until a valid file name is provided
         do {
             std::cout << "Please enter name of file" << endl;
@@ -50,7 +49,7 @@ int main() {
         }
     }
     
-    cout << "Successfully processed the file. Now closing  " << name << "and terminating program."<< endl;
+    cout << "Successfully processed the file. Now closing  " << name << " and terminating program."<< endl;
     iFile.close();
     
     return 0;
