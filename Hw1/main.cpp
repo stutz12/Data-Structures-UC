@@ -38,23 +38,21 @@ map<char, double> calculateLetterFrequency(const string& text) {
 }
 
 // Function to process a book file and update the CardCatalog.txt ;SPJII
-void processBook(string& name) {
-    ifstream iFile(name);
-
+void processBook(fstream& iFile) {
     string title, authorFull, line;
     string content;
-    while (getline(iFile, line)) {
-        if (line.empty()) {
-            break;
-        }
-        if (title.empty()) {
-            title = line;
-        }
-        else {
-            authorFull = line;
-        }
+    //from the files, we can just get the first two lines since both files start off similarly.
+    getline(iFile, title);
+    getline(iFile, authorFull);
+    
+    //get passed the contents empty lines...peter pan text file has extra lines
+    while(getline(iFile, line)) {
+        if(line.empty()) continue;
+        
+        else break;
     }
-
+    
+    //this next piece will get the contents
     if (title.empty() || authorFull.empty()) {
         cout << "Error: Invalid file format. The file should contain a title and author information." << endl;
         return;
@@ -62,6 +60,9 @@ void processBook(string& name) {
 
     // Read the rest of the content
     while (getline(iFile, line)) {
+        //account for the line break between "contents" and "all children" in peter pan text
+        if(line.empty()) continue;
+        
         content += line + "\n";
     }
 
@@ -141,7 +142,8 @@ int main() {
 		} while (iFile.fail());
 
         //This is parsing logic. SPJII
-        processBook(name);
+        //Since the file is opened on line 139, we should be using that same filestream...pass into process book method by reference
+        processBook(iFile);
 
         //prompt the user if they want to parse another file
         cout << "Finished parsing file.\nWould you like to parse another file (yes/no)?" << endl;
@@ -153,7 +155,6 @@ int main() {
         }
         else {
           break;
-		  return false;
         }
     }
 
